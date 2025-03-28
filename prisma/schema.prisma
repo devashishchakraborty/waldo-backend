@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Character {
+  id           Int    @id @default(autoincrement())
+  name         String
+  left         Float
+  right        Float
+  top          Float
+  bottom       Float
+  scene_height Float
+  scene_width  Float
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime
+  username   String
+  score      Int
+}
