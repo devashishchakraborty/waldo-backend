@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 userRouter.get("/", async (req, res) => {
   const users = await prisma.user.findMany({
     orderBy: {
-      username: "asc",
+      score: "asc",
     },
   });
   if (!users) return res.sendStatus(500);
@@ -19,11 +19,11 @@ userRouter.post("/", async (req, res) => {
   const user = await prisma.user.create({
     data: {
       username,
-      score: parseInt(score),
+      score,
     },
   });
   if (!user) return res.sendStatus(500);
-  res.sendStatus(200);
+  res.send(user);
 });
 
 export default userRouter;
